@@ -1,0 +1,111 @@
+linked list code vault:
+https://www.youtube.com/watch?v=uBZHMkpsTfg
+
+analisi della complessita' degli algoritmi:
+https://it.wikibooks.org/wiki/Algoritmi/L%27analisi_di_complessit%C3%A0_degli_algoritmi
+
+google searches:
+static variable declaration inizilization c
+const variable declaration inizilization c
+
+momento
+momento
+momento
+make file da aggiustare!
+make file da aggiustare!
+make file da aggiustare!
+
+vizualiser
+https://push-swap-visualizer.vercel.app/
+
+prima facevo cosi' ma ci mettevo il doppio delle mosse
+    // ft_push_until3(&stack_a, &stack_b);
+    // ft_sort3(&stack_a);
+    // ft_sort_until_empty(&stack_a, &stack_b);
+    // ft_rotate_to_min(&stack_a);
+
+
+ora ho fatto un pre merge sort iniziale per ricavare l'indice della posizione corretta dei nodi
+e ho creato index in t_list index con cui andro' a confrontare i nodi per poi eseguire l'algorimo
+
+i chunks servono ad avere numeri grandi agli estremi 
+divido gli stack in 3 chunks
+so la dimensione iniziale e finale di ogni chunck
+grazie all'indice so quali nodi corrispondono agli estremi dei chunk
+pusho i primi due chunk in b. ecco come:
+    1. il primo nodo di a e' contenuto nei primi due chunk?
+       se si' lo pusho in b, altrimenti ruoto lo stack a
+    2. il primo nodo di b fa parte del primo chunk?
+       se si' pusho e ruoto b, altrimenti pusho e basta
+    3. una volta rimasti solamente i nodi del terzo chunk in a
+       divido uteriormente il chunk
+    4. ripeti 1. e 2. con i chunk piu' piccoli
+       se il primo nodo in a fa parte del primo chunk sotto se e' secondo sotto
+nel caso in cui avessi 100 nodi i tre chunks per gli stack saranno: 1-33, 34-66, 67-100.
+una volta pushati i primi due chunks il terzo chunk verra' diviso uteriormente in:
+67-78, 79-89, 89-100.
+continua il processo finche' non arrivi a tre elementi nello stack_a e applica ft_sort_3 
+
+calcola il costo delle mosse di t_moves per lo spostamento di ogni nodo di b
+trova il nodo con il costo minore in b
+porta il nodo con il costo minore in cima a b
+    1. target ottimale {se ho 10 nodi e voglio trovare il target ottimale
+       dell'ottavo il valore sara; +2 o +8 (valore statico)}
+    2. rotazuione a
+    3. rotazione b
+    a ogni push di b in a siaggiornano i costi di 2. e 3.
+    potresti usare il valore negativo per la direzione e il suo assoluto per il costo
+
+inserisci sequenza mosse per elidere alcune mosse 
+
+
+===========
+=  TO DO  =
+===========
+RIVEDI TUTTA LA LOGICA DI CHUNKS
+
+
+stack_a
+[20] -> [103] -> [18] -> [14] -> [19] -> [5] -> [104] -> [41] -> [7] -> [21] -> [10] -> [28] -> 
+[1] -> [42] -> [100] -> [102] -> [NULL]
+
+stack_b
+[NULL]
+
+ra
+pb
+pb
+rb
+pb
+rb
+pb
+rb
+pb
+rb
+pb
+pb
+pb
+pb
+pb
+pb
+rb
+pb
+rb
+pb
+rb
+rra
+
+stack_a
+[20] -> [100] -> [102] -> [NULL]
+
+stack_b
+[10] -> [21] -> [7] -> [41] -> [104] -> [103] -> [18] -> [14] -> [19] -> [5] -> [28] -> [1] -> 
+[42] -> [NULL]
+
+
+
+
+
+
+
+
