@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mailinci <mailinci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chrlomba <chrlomba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:38:30 by mailinci          #+#    #+#             */
-/*   Updated: 2024/05/28 13:48:23 by mailinci         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:51:03 by chrlomba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdarg.h>
 
 int		ft_printf(const char *str, ...);
 void	ft_puthexmempf(void *str, int *c);

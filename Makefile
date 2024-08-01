@@ -1,5 +1,5 @@
 NAME = push_swap
-LIBFT = libft/libft.a
+LIBFT = -Llibft/
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 SRCS = 	push_swap.c parse_args.c parse_atoi.c list_int.c \
@@ -11,7 +11,7 @@ OBJS = $(SRCS:.c=.o)
 all: pirate $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lft
 
 $(LIBFT):
 	make -C libft

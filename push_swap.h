@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mailinci <mailinci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chrlomba <chrlomba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 13:17:08 by mailinci          #+#    #+#             */
-/*   Updated: 2024/08/01 19:26:55 by mailinci         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:03:59 by chrlomba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ typedef struct s_moves
 	int				rrr;
 	int				rra_after_push;
 	int				rrb_after_push;
-	struct s_list	*dest;
+	struct s_nodes	*dest;
 }	t_moves;
 
+
+t_moves			*moves_init();
 
 int				make_chunks(int count);
 void			last_fix(t_nodes **stack_a, int count);
@@ -66,7 +68,7 @@ void            exe_cheapest_move(t_nodes **stack_a, t_nodes **stack_b);
 t_nodes          *ft_find_min_node(t_nodes *stack_a);
 void            ft_rotate_to_min(t_nodes **stack_a);
 void	        ft_print_nodes(t_nodes *stack);
-void			apply_moves(t_nodes *cheapest_node, t_nodes **stack_a, t_nodes **stack_b);
+void			ft_apply_moves (t_nodes **stack_a, t_nodes **stack_b);
 
 
 void			handle_error(const char *message);

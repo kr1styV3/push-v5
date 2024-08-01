@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mailinci <mailinci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chrlomba <chrlomba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:52:26 by mailinci          #+#    #+#             */
-/*   Updated: 2024/08/01 19:57:58 by mailinci         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:43:06 by chrlomba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,69 @@ void ft_print_indices_and_values(t_nodes *stack_a)
     }
 }
 
+// void ft_cheapest(t_nodes *stack_a, t_nodes *stack_b)
+// {
+//     t_nodes *current = stack_b;
+//     t_moves *rise_cost_rotate_a;
+//     t_moves *rise_cost_reverse_rotate_stack_a=
+//     t_moves *rise_cost_rotate_stack_b=
+
+//     if index proximity to the top of the stack is less than the bottom of the stack
+
+//         current->
+//         }
+//         current = current->next;
+//     }
+//     free(moves);
+//     return (*cheapest_moves);
+// }
+
+void index_moves(int index, t_moves *moves, int i)
+{
+
+}
+
+t_moves *return_bestindex(t_nodes *stack_b, t_nodes *stack_a)
+{
+    t_nodes *current = stack_b;
+    t_moves *top_node_stack_a;
+    t_moves *top_node_stack_b;
+    unsigned int ra = 0;
+    unsigned int rb = 0;
+    int cost = 0;
+
+if (current->index > current->next->index )
+
+    while (current != NULL)
+    {
+        moves = moves_init();
+        moves->dest = current;
+§
+
+        cost = ft_push_cost(current);
+        if (cost > best_cost)
+        {
+            best_cost = cost;
+            best_moves->ra = current->moves->ra;
+            best_moves->rb = current->moves->rb;
+            best_moves->rra = current->moves->rra;
+            best_moves->rrb = current->moves->rrb;
+            best_moves->rr = current->moves->rr;
+            best_moves->rrr = current->moves->rrr;
+            best_moves->dest = current->moves->dest;
+        }
+        current = current->next;
+    }
+    free(moves);
+    return (best_moves);
+}
 
 
 int	main(int argc, char **argv)
 {
     t_nodes *stack_a = NULL;
     t_nodes *stack_b = NULL;
+    t_moves *moves;
     char **args;
     int free_flag;
     int *temp_array = NULL;
@@ -85,7 +142,7 @@ int	main(int argc, char **argv)
     int *array = NULL;
     int i;
     int chunk_size = 0;
-    
+
     free_flag = 0;
     args = ft_arg_checker(argc, argv);
 
@@ -111,7 +168,7 @@ int	main(int argc, char **argv)
         return (1);
     }
 
- 
+
     stack_size = ft_lstsize_int(stack_a);
     array = malloc(sizeof(int) * stack_size);
     if (!array)
@@ -121,7 +178,7 @@ int	main(int argc, char **argv)
             free(args);
         return (1);
     }
-    
+
     t_nodes *current = stack_a;
     for (i = 0; current != NULL; i++)
     {
@@ -139,24 +196,29 @@ int	main(int argc, char **argv)
     printf("\n");
 
     chunk_size = make_chunks(stack_size);
+    (void)chunk_size;
     push_chunks(&stack_a, &stack_b, stack_size);
 
 
+    printf("\nstack_a\n");
+	ft_print_nodes(stack_a);
+    printf("\nstack_b\n");
+    ft_print_nodes(stack_b);
     if (ft_lstsize_int(stack_a) == 3)
     {
         ft_sort3(&stack_a);
     }
+    free (temp_array);
 
-
-
-    //exit(1);
-
-
-    // start pushing to a according to the cost of the moves
+    while (stack_b)
+    {
+        ft_apply_moves(moves, &stack_a, &stack_b);
+        free(moves);
+    }
     // ft_rotate_to_min
 
     printf("\nstack_a\n");
-	ft_print_nodes(stack_a); 
+	ft_print_nodes(stack_a);
     printf("\nstack_b\n");
     ft_print_nodes(stack_b);
 

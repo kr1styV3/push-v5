@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   moves_cost.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mailinci <mailinci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chrlomba <chrlomba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:42:51 by mailinci          #+#    #+#             */
-/*   Updated: 2024/08/01 19:29:43 by mailinci         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:28:22 by chrlomba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdarg.h>
 
 t_moves *moves_init()
 {
@@ -53,7 +54,7 @@ int ft_push_cost(t_nodes *node_b)
         current_b->moves->rra--;
         current_b->moves->rrb--;
     }
-    cost = current_b->moves->ra + current_b->moves->rb + current_b->moves->rra + current_b->moves->rrb + current_b->moves->rr + current_b->moves->rrr;
+    cost = current_b->moves->ra + current_b->moves->rb + current_b->moves->rra + current_b->moves->rrb + current_b->moves->rr + current_b->moves->rrr + current_b->moves->rra_after_push;
 
     //printf("DEBUG ft_push_cost:      Cost of pushing %d is %d\n", node_b->value, cost);
     return cost;
@@ -76,31 +77,39 @@ void apply_rot_single(int *moves, void (*rotate_fx)(t_nodes **), t_nodes **stack
     }
 }
 
-void apply_moves(t_nodes *cheapest_node, t_nodes **stack_a, t_nodes **stack_b)
+void ft_apply_moves(t_nodes **stack_a, t_nodes **stack_b)
 {
-    printf("DEBUG\tt_moves: ra: %d, rb: %d, rra: %d, rrb: %d, rr: %d, rrr: %d\n rra_after_push : %d\n", 
-           cheapest_node->moves->ra, 
-           cheapest_node->moves->rb, 
-           cheapest_node->moves->rra, 
-           cheapest_node->moves->rrb, 
-           cheapest_node->moves->rr, 
-           cheapest_node->moves->rrr, 
-           cheapest_node->moves->rra_after_push);
+    t_moves *dest;
+    dest = return_bestindex(*stack_b);
+    printf("DEBUG\tt_moves: ra: %d, rb: %d, rra: %d, rrb: %d, rr: %d, rrr: %d\n rra_after_push : %d\n",
+           dest->ra,
+           dest->rb,
+           dest->rra,
+           dest->rrb,
+           dest->rr,
+           dest->rrr,
+           dest->rra_after_push);
 
-    if (cheapest_node->moves->rr > 0)
-        apply_rot_double(&(cheapest_node->moves->rr), rr, stack_a, stack_b);
-    if (cheapest_node->moves->rrr > 0)
-        apply_rot_double(&(cheapest_node->moves->rrr), rrr, stack_a, stack_b);
-    if (cheapest_node->moves->ra > 0)
-        apply_rot_single(&(cheapest_node->moves->ra), ra, stack_a);
-    if (cheapest_node->moves->rb > 0)
-        apply_rot_single(&(cheapest_node->moves->rb), rb, stack_b);
-    if (cheapest_node->moves->rra > 0)
-        apply_rot_single(&(cheapest_node->moves->rra), rra, stack_a);
-    if (cheapest_node->moves->rrb > 0)
-        apply_rot_single(&(cheapest_node->moves->rrb), rrb, stack_b);
+    if (dest->rr > 0)
+        while(dest->rr > 0)
+            apply_rot_double(&(dest->rr), rr, stack_a, stack_b);
+    if (dest->rrr > 0)
+        while(dest->rrr > 0)
+            apply_rot_double(&(dest->rrr), rrr, stack_a, stack_b);
+    if (dest->ra > 0)
+        while(dest->ra > 0)
+            apply_rot_single(&(dest->ra), ra, stack_a);
+    if (dest->rb > 0)
+        while(dest->rb > 0)
+            apply_rot_single(&(dest->rb), rb, stack_b);
+    if (dest->rra > 0)
+        while(dest->rra > 0)
+             apply_rot_single(&(dest->rra), rra, stack_a);
+    if (dest->rrb > 0)
+        while(dest->rrb > 0)
+            apply_rot_single(&(dest->rrb), rrb, stack_b);
 
     pa(stack_a, stack_b);
-    if (cheapest_node->moves->rra_after_push > 0)
-        apply_rot_single(&(cheapest_node->moves->rra_after_push), rra, stack_a);
+    if (dest->rra_after_push > 0)
+        apply_rot_single(&(dest->rra_after_push), rra, stack_a);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mailinci <mailinci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chrlomba <chrlomba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 20:55:21 by mailinci          #+#    #+#             */
-/*   Updated: 2024/08/01 19:30:11 by mailinci         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:57:34 by chrlomba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ void	push_chunks(t_nodes	**stack_a, t_nodes **stack_b, int count)
 	min_chunk = 1;
 	pushed = 0;
 	step = make_chunks(count); 	  //ft already ordered
+
 	while (pushed < (count - 3) && !ft_order_check(*stack_a))
 	{
-		//printf("DEBUG index: %d\tvalue: %d\n", (*stack_a)->index, (*stack_a)->value);
+		printf("DEBUG index: %d\tvalue: %d\n", (*stack_a)->index, (*stack_a)->value);
 		if ((*stack_a)->index >= min_chunk
 			&& ((*stack_a)->index) < (min_chunk + step + step)
 			&& (*stack_a)->index <= (count - 3))
@@ -77,7 +78,7 @@ void	push_chunks(t_nodes	**stack_a, t_nodes **stack_b, int count)
 
 void	update_chunks(t_nodes **stack_b, int *min_chunk,
 	int *step, int *pushed)
-{ 	
+{
 	if (*stack_b && (*stack_b)->index && ft_lstsize_int(*stack_b) > 1
 		&& (*stack_b)->index >= *min_chunk
 		&& (*stack_b)->index < (*min_chunk + *step))
